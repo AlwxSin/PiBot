@@ -25,10 +25,10 @@ def check_updates():
         return False
 
     if not request.status_code == 200:
-        print 'status ' + request.status_code
+        print 'status ' + str(request.status_code)
         return False
     if not request.json()['ok']:
-        print 'json ok = ' + request.json()['ok']
+        print 'json ok = ' + str(request.json()['ok'])
         return False
     for update in request.json()['result']:
         print 'got update'
