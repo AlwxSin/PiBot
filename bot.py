@@ -29,6 +29,17 @@ def check_updates():
     for update in r.json()['result']:
         offset = update['update_id']
 
+        offset_file = open('offset', 'r')  # Грязный хак. TODO пока не будет отслеживания
+        old_offset = int(offset_file.read())
+        offset_file.close()
+
+        if old_offset >= offset:
+            continue
+
+        offset_file = open('offset', 'w')
+        offset_file.write(str(offset))
+        offset_file.close()
+
         if 'message' not in update or 'text' not in update['message']:
             log_event('Unknown update: %s' % update)
             continue
@@ -43,13 +54,10 @@ def check_updates():
 
         message = update['message']['text']
 
-        if message == '/reboot' and len(r.json()['result']) > 1 and update == r.json()['result'][0]:
-            continue  # Грязный хак. TODO пока не будет отслеживания
-
         parameters = (offset, username, from_id, message)
 
-        if from_id not in ADMIN_IDs and message[0] is '/':
-            send_text("You're not authorized to use me!", from_id)
+        if from_id not in ADMIN_IDs and message.startswith('/'):
+            send_text(from_id, "You're not authorized to use me!")
             log_event('Unauthorized: %s' % update)
             continue
 
