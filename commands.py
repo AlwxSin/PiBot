@@ -9,7 +9,6 @@ from random import randint
 
 
 def run_command(offset, name, from_id, cmd):
-    print 'running cmd'
     cmd = cmd.lower()
     cmd = cmd.split(' ')
     main = cmd[0]
@@ -20,7 +19,7 @@ def run_command(offset, name, from_id, cmd):
     elif main in dnd:
         send_text(from_id, throw_cubes(cmd))
 
-    elif main == u'катя':
+    elif main in [u'катя', u'kate']:
         i = randint(0, len(kate)-1)
         send_text(from_id, kate[i])
 

@@ -12,23 +12,19 @@ offset = 0  # ID последнего полученного обновлени�
 
 
 def check_updates():
-    print 'checking'
     """Проверка обновлений на сервере и инициация действий, в зависимости от команды"""
     global offset
     data = {'offset': offset + 1, 'limit': 10, 'timeout': 5}
 
     try:
         request = requests.post(FULL_URL + '/getUpdates', data=data)
-        print 'get update'
     except:
         log_event('Error getting updates')
         return False
 
     if not request.status_code == 200:
-        print 'status ' + str(request.status_code)
         return False
     if not request.json()['ok']:
-        print 'json ok = ' + str(request.json()['ok'])
         return False
     for update in request.json()['result']:
         print 'got update'
