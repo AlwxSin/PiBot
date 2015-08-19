@@ -8,6 +8,7 @@ import time
 if __name__ == "__main__":
     while True:
         try:
+            print 'running'
             check_updates()
             time.sleep(INTERVAL)
         except KeyboardInterrupt:

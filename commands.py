@@ -9,6 +9,7 @@ from random import randint
 
 
 def run_command(offset, name, from_id, cmd):
+    print 'running cmd'
     cmd = cmd.lower()
     cmd = cmd.split(' ')
     main = cmd[0]
