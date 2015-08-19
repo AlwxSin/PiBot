@@ -20,7 +20,7 @@ def run_command(offset, name, from_id, cmd):
         send_text(from_id, throw_cubes(cmd))
 
     elif main == u'катя':
-        i = randint(0, len(kate))
+        i = randint(0, len(kate)-1)
         send_text(from_id, kate[i])
 
     elif main == '/reboot':
@@ -28,5 +28,5 @@ def run_command(offset, name, from_id, cmd):
         send_text(from_id, u'Ушел покурить')
 
     else:
-        i = randint(0, len(unknown))
+        i = randint(0, len(unknown)-1)
         send_text(from_id, unknown[i])
