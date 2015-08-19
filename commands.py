@@ -21,9 +21,9 @@ def run_command(offset, name, from_id, cmd):
         i = randint(0, len(kate)-1)
         send_text(from_id, kate[i])
 
-    elif main == '/reboot':
-        reboot(name)
-        send_text(from_id, u'Ушел покурить')
+    # elif main == '/reboot':
+    #     reboot(name)
+    #     send_text(from_id, u'Ушел покурить')
 
     else:
         i = randint(0, len(unknown)-1)
