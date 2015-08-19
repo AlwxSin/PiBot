@@ -14,7 +14,6 @@ def log_event(text):
     # ToDo: 1) Запись лога в файл
 
     event = '%s >> %s' % (time.ctime(), text)
-    print event
 
 def send_text(chat_id, text, counter=0):
     """Отправка текстового сообщения по chat_id
@@ -59,5 +58,3 @@ def reboot(name):
     output = process.communicate()[0]
 
     log_event('Reboot by %s' % name)
-
-    print output

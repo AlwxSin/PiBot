@@ -11,5 +11,4 @@ if __name__ == "__main__":
             check_updates()
             time.sleep(INTERVAL)
         except KeyboardInterrupt:
-            print 'Прервано пользователем..'
             break

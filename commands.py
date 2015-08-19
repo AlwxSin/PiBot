@@ -6,8 +6,6 @@ from dictionaries import commands, dnd, kate, unknown
 from random import randint
 
 
-
-
 def run_command(offset, name, from_id, cmd):
     cmd = cmd.lower()
     cmd = cmd.split(' ')

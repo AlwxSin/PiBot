@@ -27,7 +27,6 @@ def check_updates():
     if not request.json()['ok']:
         return False
     for update in request.json()['result']:
-        print 'got update'
         offset = update['update_id']
 
         if 'message' not in update or 'text' not in update['message']:
