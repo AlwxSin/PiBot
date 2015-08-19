@@ -17,16 +17,16 @@ def check_updates():
     data = {'offset': offset + 1, 'limit': 10, 'timeout': 5}
 
     try:
-        request = requests.post(FULL_URL + '/getUpdates', data=data)
+        r = requests.post(FULL_URL + '/getUpdates', data=data)
     except:
         log_event('Error getting updates')
         return False
 
-    if not request.status_code == 200:
+    if not r.status_code == 200:
         return False
-    if not request.json()['ok']:
+    if not r.json()['ok']:
         return False
-    for update in request.json()['result']:
+    for update in r.json()['result']:
         offset = update['update_id']
 
         if 'message' not in update or 'text' not in update['message']:
@@ -42,6 +42,10 @@ def check_updates():
             username = update['message']['chat']['last_name']
 
         message = update['message']['text']
+
+        if message == '/reboot' and len(r.json()['result']) > 1 and update == r.json()['result'][0]:
+            continue  # Грязный хак. TODO пока не будет отслеживания
+
         parameters = (offset, username, from_id, message)
 
         if from_id not in ADMIN_IDs and message[0] is '/':
