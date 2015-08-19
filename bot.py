@@ -19,15 +19,19 @@ def check_updates():
 
     try:
         request = requests.post(FULL_URL + '/getUpdates', data=data)
+        print 'get update'
     except:
         log_event('Error getting updates')
         return False
 
     if not request.status_code == 200:
+        print 'status ' + request.status_code
         return False
     if not request.json()['ok']:
+        print 'json ok = ' + request.json()['ok']
         return False
     for update in request.json()['result']:
+        print 'got update'
         offset = update['update_id']
 
         if 'message' not in update or 'text' not in update['message']:
