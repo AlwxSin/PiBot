@@ -63,4 +63,4 @@ def reboot(name):
 
 def abort(name):
     log_event('Aborted by %s' % name)
-    sys.exit(1)  # supervisor should not restart process
+    sys.exit(0)
