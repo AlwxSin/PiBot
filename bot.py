@@ -56,11 +56,6 @@ def check_updates():
 
         parameters = (offset, username, from_id, message)
 
-        if from_id not in ADMIN_IDs and message.startswith('/'):
-            send_text(from_id, "You're not authorized to use me!")
-            log_event('Unauthorized: %s' % update)
-            continue
-
         log_event('Message (id%s) from %s (id%s): "%s"' % parameters)
 
         run_command(*parameters)

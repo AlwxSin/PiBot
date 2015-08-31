@@ -1,9 +1,10 @@
 # coding=utf-8
 __author__ = 'Alwx'
 
-from extTools import send_text, send_photo, throw_cubes, reboot, abort, toggle_play
+from extTools import send_text, send_photo, throw_cubes, reboot, abort, toggle_play, log_event, unauthorized
 from dictionaries import commands, dnd, kate, unknown
 from random import randint
+from settings import ADMIN_IDs
 
 
 def run_command(offset, name, from_id, cmd):
@@ -22,12 +23,20 @@ def run_command(offset, name, from_id, cmd):
         send_text(from_id, kate[i])
 
     elif main == '/reboot':
-        reboot(name)
-        send_text(from_id, u'Ушел покурить')
+        if from_id in ADMIN_IDs:
+            log_event('Reboot by %s' % name)
+            send_text(from_id, u'Ушел покурить')
+            reboot()
+        else:
+            unauthorized(from_id, name, cmd)
 
     elif main == '/abort':
-        send_text(from_id, u'Выключаюсь')
-        abort(name)
+        if from_id in ADMIN_IDs:
+            log_event('Aborted by %s' % name)
+            send_text(from_id, u'Выключаюсь')
+            abort()
+        else:
+            unauthorized(from_id, name, cmd)
 
     elif main == '/pause':
         speed = toggle_play()

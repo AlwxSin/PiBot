@@ -53,17 +53,14 @@ def throw_cubes(cmd):
     return result
 
 
-def reboot(name):
+def reboot():
     command = "/usr/bin/sudo /sbin/reboot"
 
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
 
-    log_event('Reboot by %s' % name)
 
-
-def abort(name):
-    log_event('Aborted by %s' % name)
+def abort():
     sys.exit(0)
 
 
@@ -76,3 +73,8 @@ def toggle_play():
         toggle = requests.post(PI_KODI_URL, json=play_pause)
         if toggle.status_code == 200:
             return toggle.json()['result']['speed']
+
+
+def unauthorized(from_id, name, cmd):
+    send_text(from_id, "You're not authorized to use this command!")
+    log_event('Unauthorized: %s %s %s' % (from_id, name, cmd))
