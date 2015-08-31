@@ -5,7 +5,8 @@ import requests
 import subprocess
 import sys
 from random import randint
-from settings import FULL_URL
+from settings import FULL_URL, PI_KODI_URL
+from dictionaries import get_player, play_pause
 
 
 def log_event(text):
@@ -64,3 +65,14 @@ def reboot(name):
 def abort(name):
     log_event('Aborted by %s' % name)
     sys.exit(0)
+
+
+def toggle_play():
+    player = requests.post(PI_KODI_URL, json=get_player)
+
+    if player.status_code == 200:
+        play_pause['params']['playerid'] = player.json()['result'][0]['playerid']
+
+        toggle = requests.post(PI_KODI_URL, json=play_pause)
+        if toggle.status_code == 200:
+            return toggle.json()['result']['speed']

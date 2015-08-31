@@ -1,7 +1,7 @@
 # coding=utf-8
 __author__ = 'Alwx'
 
-from extTools import send_text, send_photo, throw_cubes, reboot, abort
+from extTools import send_text, send_photo, throw_cubes, reboot, abort, toggle_play
 from dictionaries import commands, dnd, kate, unknown
 from random import randint
 
@@ -28,6 +28,14 @@ def run_command(offset, name, from_id, cmd):
     elif main == '/abort':
         send_text(from_id, u'Выключаюсь')
         abort(name)
+
+    elif main == '/pause':
+        speed = toggle_play()
+        if speed:
+            text = 'play'
+        else:
+            text = 'pause'
+        send_text(from_id, text)
 
     else:
         i = randint(0, len(unknown)-1)

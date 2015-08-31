@@ -61,3 +61,6 @@ unknown = [
     u'Подожди, я спрошу у жены',
     u'Мне мама не разрешает',
 ]
+
+get_player = {"jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1}
+play_pause = {"jsonrpc": "2.0", "method": "Player.PlayPause", "params": { "playerid": 1 }, "id": 1}
