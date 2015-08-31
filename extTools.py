@@ -3,6 +3,7 @@ __author__ = 'Alwx'
 import time
 import requests
 import subprocess
+import sys
 from random import randint
 from settings import FULL_URL
 
@@ -58,3 +59,8 @@ def reboot(name):
     output = process.communicate()[0]
 
     log_event('Reboot by %s' % name)
+
+
+def abort(name):
+    log_event('Aborted by %s' % name)
+    sys.exit(0)

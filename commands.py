@@ -1,7 +1,7 @@
 # coding=utf-8
 __author__ = 'Alwx'
 
-from extTools import send_text, send_photo, throw_cubes, reboot
+from extTools import send_text, send_photo, throw_cubes, reboot, abort
 from dictionaries import commands, dnd, kate, unknown
 from random import randint
 
@@ -24,6 +24,10 @@ def run_command(offset, name, from_id, cmd):
     elif main == '/reboot':
         reboot(name)
         send_text(from_id, u'Ушел покурить')
+
+    elif main == '/abort':
+        send_text(from_id, u'Выключаюсь')
+        abort(name)
 
     else:
         i = randint(0, len(unknown)-1)
